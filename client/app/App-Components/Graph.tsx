@@ -1,6 +1,9 @@
 "use client";
-import React, { PureComponent } from "react";
+import React from "react";
 import {
+	BarChart,
+	Bar,
+	Rectangle,
 	LineChart,
 	Line,
 	XAxis,
@@ -10,16 +13,25 @@ import {
 	Legend,
 	ResponsiveContainer,
 } from "recharts";
-import data from "@/data.json";
 
-export default class Graph extends PureComponent {
-	render() {
-		return (
-			<ResponsiveContainer width="100%" height="100%">
-				<LineChart
+type Data = {
+	id: string;
+	tableName: string;
+	name: string;
+	x: number;
+	y: number;
+	options: any;
+	payload: object[];
+};
+
+export default function Graph({ data, switchValue }) {
+	return (
+		<ResponsiveContainer width="100%" height="100%">
+			{switchValue === "bar" ? (
+				<BarChart
 					width={500}
 					height={300}
-					data={data}
+					data={data.payload}
 					margin={{
 						top: 10,
 						right: 10,
@@ -27,7 +39,27 @@ export default class Graph extends PureComponent {
 						bottom: 10,
 					}}
 				>
-					{/* <CartesianGrid strokeDasharray="3 3" /> */}
+					<XAxis dataKey="x" />
+					<YAxis />
+					<Tooltip />
+					<Bar
+						dataKey="y"
+						fill="#DC2626"
+						activeBar={<Rectangle fill="#771515" stroke="#771515" />}
+					/>
+				</BarChart>
+			) : (
+				<LineChart
+					width={500}
+					height={300}
+					data={data.payload}
+					margin={{
+						top: 10,
+						right: 10,
+						left: 10,
+						bottom: 10,
+					}}
+				>
 					<XAxis dataKey="x" />
 					<YAxis />
 					<Tooltip />
@@ -40,7 +72,7 @@ export default class Graph extends PureComponent {
 						strokeWidth={3}
 					/>
 				</LineChart>
-			</ResponsiveContainer>
-		);
-	}
+			)}
+		</ResponsiveContainer>
+	);
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import {
 	ResizableHandle,
 	ResizablePanel,
@@ -15,19 +17,37 @@ import { DataTable } from "./data-table";
 import { Separator } from "@/components/ui/separator";
 import TableInputform from "./TableInputForm";
 import Graph from "./Graph";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import Image from "next/image";
+
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 type Data = {
+	id: string;
+	tableName: string;
 	name: string;
 	x: number;
 	y: number;
 	options: any;
+	payload: object[];
 };
 
 type MainPanelProps = {
 	data: Data[];
+	handleUpdateTable: (arg0: string) => void;
+	selectedTable: any;
 };
 
-export default function MainPanel({ data }: MainPanelProps) {
+export default function MainPanel({
+	data,
+	handleUpdateTable,
+	selectedTable,
+}: MainPanelProps) {
+	const [switchValue, setSwitchValue] = useState<string>("line");
+
 	return (
 		<div className="flex gap-12">
 			<div className="flex-1">
@@ -39,37 +59,82 @@ export default function MainPanel({ data }: MainPanelProps) {
 						<div className="flex h-full items-center justify-center flex-col">
 							{/* <div className="flex-1">Graph Element</div> */}
 							<div className="pr-8 pt-8 flex-1 w-full">
-								<Graph></Graph>
+								<Graph switchValue={switchValue} data={selectedTable}></Graph>
 							</div>
 							<Separator
 								orientation="horizontal"
 								className="w-full"
 							></Separator>
-							<TableInputform></TableInputform>
+							<div className="flex justify-between py-4 w-full px-12">
+								<div className="h-1"></div>
+								<div className="flex item-center gap-2 justify-center">
+									<ToggleGroup
+										onValueChange={(e) => setSwitchValue(e)}
+										defaultValue="line"
+										type="single"
+									>
+										<ToggleGroupItem
+											value="line"
+											aria-label="Toggle line chart"
+											className="rounded-xl"
+										>
+											<Image
+												width={20}
+												height={20}
+												src="/images/line-chart.png"
+												alt="line chart icon"
+											></Image>
+										</ToggleGroupItem>
+										<ToggleGroupItem
+											value="bar"
+											aria-label="Toggle bar chart"
+											className="rounded-xl"
+										>
+											<Image
+												width={20}
+												height={20}
+												src="/images/bar-chart.png"
+												alt="bar chart icon"
+												className="mb-1"
+											></Image>
+										</ToggleGroupItem>
+									</ToggleGroup>
+								</div>
+							</div>
+							<Separator
+								orientation="horizontal"
+								className="w-full"
+							></Separator>
+							<TableInputform data={selectedTable}></TableInputform>
 						</div>
 					</ResizablePanel>
 					<ResizableHandle withHandle />
 					<ResizablePanel defaultSize={40}>
 						<div className="flex h-full items-center justify-center">
-							<DataTable columns={columns} data={data}></DataTable>
+							<DataTable
+								columns={columns}
+								data={selectedTable.payload}
+								tableHeaders={selectedTable}
+							></DataTable>
 						</div>
 					</ResizablePanel>
 				</ResizablePanelGroup>{" "}
 			</div>
 			<div>
-				<Select>
+				<Select
+					onValueChange={(e: any) => {
+						handleUpdateTable(e);
+					}}
+				>
 					<SelectTrigger className="w-[320px] border-none">
-						<SelectValue placeholder="Select Table" />
+						<SelectValue placeholder={selectedTable.tableName} />
 					</SelectTrigger>
 					<SelectContent className="min-h-[726px] shadow-std rounded bg-black">
-						<SelectItem value="light">Table 1</SelectItem>
-						<SelectItem value="dark">Table 2</SelectItem>
-						<SelectItem value="3">Table 3</SelectItem>
-						<SelectItem value="4">Table 4</SelectItem>
-						<SelectItem value="5">Table 5</SelectItem>
-						<SelectItem value="6">Table 6</SelectItem>
-						<SelectItem value="7">Table 7</SelectItem>
-						<SelectItem value="8">Table 8</SelectItem>
+						{data.map((x) => (
+							<SelectItem key={x.id} value={x.id}>
+								{x.tableName}
+							</SelectItem>
+						))}
 					</SelectContent>
 				</Select>
 			</div>

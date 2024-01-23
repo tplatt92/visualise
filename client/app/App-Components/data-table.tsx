@@ -1,5 +1,9 @@
 "use client";
 
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+import * as React from "react";
+
 import {
 	ColumnDef,
 	flexRender,
@@ -16,12 +20,12 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
-	data: TData[];
+	data: TData[] & { payload: TData[] };
 }
+
+
 
 export function DataTable<TData, TValue>({
 	columns,
@@ -35,8 +39,8 @@ export function DataTable<TData, TValue>({
 
 	return (
 		<div className="rounded-md border w-full">
-			<ScrollArea className=" h-[772px]  rounded-md border ">
-				<Table>
+			<Table>
+				<ScrollArea className=" h-[772px]  rounded-md border">
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<TableRow key={headerGroup.id}>
@@ -84,8 +88,8 @@ export function DataTable<TData, TValue>({
 							</TableRow>
 						)}
 					</TableBody>
-				</Table>{" "}
-			</ScrollArea>
+				</ScrollArea>
+			</Table>
 		</div>
 	);
 }
