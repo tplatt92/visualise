@@ -9,10 +9,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import data from "@/mockData.json";
-
 import { ColumnDef } from "@tanstack/react-table";
 
 // May need userID when auth is implemented

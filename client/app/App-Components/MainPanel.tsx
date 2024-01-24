@@ -18,9 +18,6 @@ import { Separator } from "@/components/ui/separator";
 import TableInputform from "./TableInputForm";
 import Graph from "./Graph";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import Image from "next/image";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -57,7 +54,7 @@ export default function MainPanel({
 				>
 					<ResizablePanel defaultSize={60}>
 						<div className="flex h-full items-center justify-center flex-col">
-							{/* <div className="flex-1">Graph Element</div> */}
+
 							<div className="pr-8 pt-8 flex-1 w-full">
 								<Graph switchValue={switchValue} data={selectedTable}></Graph>
 							</div>
