@@ -12,6 +12,7 @@ const ovo = Ovo({ subsets: ["latin"], weight: "400" });
 export default function Home() {
 	const [usernameInput, setUsernameInput] = useState("");
 	const [passwordInput, setPasswordInput] = useState("");
+	const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
 
 	return (
 		<main className="bg-[#090909] h-screen w-full flex">
@@ -59,19 +60,19 @@ export default function Home() {
 			<Separator orientation="vertical" className="h-screen z-50 shadow-std" />
 			<div className="w-1/2 h-screen">
 				<div className="absolute right-[64px] top-[36px]">
-					<Link href="/create-account">
+					<Link href="/">
 						<Button variant="outline" className="flex-end">
-							Create Account
+							Log In
 						</Button>
 					</Link>
 				</div>
 				<div className="h-screen w-full ">
 					<div className="flex mt-[30%] gap-4 flex-col justify-center items-center">
 						<h2 className={`text-[#FFF5EE] text-[48px] ${ovo.className}`}>
-							Log In
+							Create Account
 						</h2>
 						<p className="text-[#FFF5EE] text-[16px] brightness-50 mb-8">
-							Enter details below to log in.
+							Enter details below to Create Account.
 						</p>
 						<Input
 							type="text"
@@ -82,13 +83,20 @@ export default function Home() {
 						></Input>
 						<Input
 							type="password"
-							className="rounded w-[400px] mb-8"
+							className="rounded w-[400px]"
 							placeholder="Password"
 							value={passwordInput}
 							onChange={(e) => setPasswordInput(e.target.value)}
 						></Input>
+						<Input
+							type="password"
+							className="rounded w-[400px] mb-8"
+							placeholder="Confirm Password"
+							value={confirmPasswordInput}
+							onChange={(e) => setConfirmPasswordInput(e.target.value)}
+						></Input>
 						<Link href="/dashboard">
-							<Button className="rounded w-[400px]">Log In</Button>
+							<Button className="rounded w-[400px] ">Create Account</Button>
 						</Link>
 					</div>
 				</div>

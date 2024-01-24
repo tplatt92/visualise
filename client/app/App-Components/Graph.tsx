@@ -41,7 +41,16 @@ export default function Graph({ data, switchValue }) {
 				>
 					<XAxis dataKey="x" />
 					<YAxis />
-					<Tooltip />
+					<Tooltip
+						wrapperStyle={{
+							padding: "5px",
+							width: 120,
+							backgroundColor: "grey",
+							color: "#DC2626",
+							opacity: "0.80",
+							borderRadius: "5px",
+						}}
+					/>
 					<Bar
 						dataKey="y"
 						fill="#DC2626"
@@ -61,8 +70,17 @@ export default function Graph({ data, switchValue }) {
 					}}
 				>
 					<XAxis dataKey="x" />
-					<YAxis />
-					<Tooltip />
+					<YAxis dataKey="y" />
+					<Tooltip
+						wrapperStyle={{
+							padding: "5px",
+							width: 120,
+							backgroundColor: "grey",
+							color: "#DC2626",
+							opacity: "0.80",
+							borderRadius: "5px",
+						}}
+					/>
 
 					<Line
 						type="monotone"
