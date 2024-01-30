@@ -15,7 +15,7 @@ export default function Home() {
 
 	return (
 		<main className="bg-[#090909] h-screen w-full flex">
-			<div className="h-full w-1/2 bg-blue-200">
+			<div className="h-full w-1/2 bg-black">
 				<Image
 					alt="Background image"
 					src="/images/login-bg.jpg"

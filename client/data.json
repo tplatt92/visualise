@@ -1,7 +1,7 @@
 [
   {
-    "userId": 1,
-    "userData": [
+    "userId": "1",
+    "userTables": [
       {
         "id": "0",
         "tableName": "Test Table 1",

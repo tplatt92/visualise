@@ -25,8 +25,6 @@ interface DataTableProps<TData, TValue> {
 	data: TData[] & { payload: TData[] };
 }
 
-
-
 export function DataTable<TData, TValue>({
 	columns,
 	data,
