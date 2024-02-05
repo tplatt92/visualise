@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { GraphProps, Payload } from "@/types/types";
 import {
 	BarChart,
 	Bar,
@@ -11,25 +11,34 @@ import {
 	Tooltip,
 	ResponsiveContainer,
 } from "recharts";
+import { SortType, GraphType } from "@/types/enums";
 
-type Data = {
-	id: string;
-	tableName: string;
-	name: string;
-	x: number;
-	y: number;
-	options: any;
-	payload: object[];
-};
+export default function Graph({
+	selectedTable,
+	graphType,
+	sortType,
+}: GraphProps) {
+	if (sortType === SortType.Date) {
+		selectedTable.payload = [
+			...selectedTable.payload.sort((a: any, b: any) => a.entryid - b.entryid),
+		];
+	} else if (sortType === SortType.Asc) {
+		selectedTable.payload = [
+			...selectedTable.payload.sort((a: any, b: any) => a.y - b.y),
+		];
+	} else if (sortType === SortType.Desc) {
+		selectedTable.payload = [
+			...selectedTable.payload.sort((a: any, b: any) => b.y - a.y),
+		];
+	}
 
-export default function Graph({ data, switchValue }) {
 	return (
 		<ResponsiveContainer width="100%" height="100%">
-			{switchValue === "bar" ? (
+			{graphType === GraphType.Bar ? (
 				<BarChart
 					width={500}
 					height={300}
-					data={data.payload}
+					data={selectedTable.payload}
 					margin={{
 						top: 10,
 						right: 10,
@@ -39,7 +48,7 @@ export default function Graph({ data, switchValue }) {
 				>
 					<XAxis dataKey="x" />
 					<YAxis />
-					<Tooltip
+					{/* <Tooltip
 						wrapperStyle={{
 							padding: "5px",
 							width: 120,
@@ -48,7 +57,7 @@ export default function Graph({ data, switchValue }) {
 							opacity: "0.80",
 							borderRadius: "5px",
 						}}
-					/>
+					/> */}
 					<Bar
 						dataKey="y"
 						fill="#DC2626"
@@ -59,7 +68,7 @@ export default function Graph({ data, switchValue }) {
 				<LineChart
 					width={500}
 					height={300}
-					data={data.payload}
+					data={selectedTable.payload}
 					margin={{
 						top: 10,
 						right: 10,
@@ -69,7 +78,7 @@ export default function Graph({ data, switchValue }) {
 				>
 					<XAxis dataKey="x" />
 					<YAxis dataKey="y" />
-					<Tooltip
+					{/* <Tooltip
 						wrapperStyle={{
 							padding: "5px",
 							width: 120,
@@ -78,7 +87,7 @@ export default function Graph({ data, switchValue }) {
 							opacity: "0.80",
 							borderRadius: "5px",
 						}}
-					/>
+					/> */}
 
 					<Line
 						type="monotone"

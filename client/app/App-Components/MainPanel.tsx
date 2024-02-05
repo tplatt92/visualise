@@ -12,38 +12,44 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
 import { Separator } from "@/components/ui/separator";
-import TableInputform from "./TableInputForm";
+import TableInputForm from "./TableInputForm";
 import Graph from "./Graph";
-import { useState } from "react";
-import Image from "next/image";
-
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-
-type Data = {
-	id: string;
-	tableName: string;
-	name: string;
-	x: number;
-	y: number;
-	options: any;
-	payload: object[];
-};
-
-type MainPanelProps = {
-	data: Data[];
-	handleUpdateTable: (arg0: string) => void;
-	selectedTable: any;
-};
+import {
+	JSXElementConstructor,
+	Key,
+	PromiseLikeOfReactNode,
+	ReactElement,
+	ReactNode,
+	ReactPortal,
+	useState,
+} from "react";
+import GraphTypeSwitchAndDelete from "./GraphTypeSwitchAndDelete";
+import SortTypeSwitch from "./SortTypeSwitch";
+import TablePanel from "./TablePanel";
+import { MainPanelProps } from "@/types/types";
+import { GraphType, SortType } from "@/types/enums";
 
 export default function MainPanel({
 	data,
-	handleUpdateTable,
+	handleUpdateSelectedTable,
 	selectedTable,
+	userId,
+	handleNewRow,
+	handleDeleteTable,
+	handleDeleteRow,
+	handleEditRow,
 }: MainPanelProps) {
-	const [switchValue, setSwitchValue] = useState<string>("line");
+	const [graphType, setGraphType] = useState("line")
+	const [sortType, setSortType] = useState("date");
+
+	function handleSortType(sortType: SortType | string) {
+		setSortType(sortType);
+	}
+
+	function handleGraphType(switchVal: GraphType | string) {
+		setGraphType(switchVal);
+	}
 
 	return (
 		<div className="flex gap-12">
@@ -54,9 +60,12 @@ export default function MainPanel({
 				>
 					<ResizablePanel defaultSize={60}>
 						<div className="flex h-full items-center justify-center flex-col">
-
 							<div className="pr-8 pt-8 flex-1 w-full">
-								<Graph switchValue={switchValue} data={selectedTable}></Graph>
+								<Graph
+									graphType={graphType}
+									selectedTable={selectedTable}
+									sortType={sortType}
+								></Graph>
 							</div>
 							<Separator
 								orientation="horizontal"
@@ -64,55 +73,33 @@ export default function MainPanel({
 							></Separator>
 							<div className="flex justify-between py-4 w-full px-12">
 								<div className="h-1"></div>
-								<div className="flex item-center gap-2 justify-center">
-									<ToggleGroup
-										onValueChange={(e) => setSwitchValue(e)}
-										defaultValue="line"
-										type="single"
-									>
-										<ToggleGroupItem
-											value="line"
-											aria-label="Toggle line chart"
-											className="rounded-xl"
-										>
-											<Image
-												width={20}
-												height={20}
-												src="/images/line-chart.png"
-												alt="line chart icon"
-											></Image>
-										</ToggleGroupItem>
-										<ToggleGroupItem
-											value="bar"
-											aria-label="Toggle bar chart"
-											className="rounded-xl"
-										>
-											<Image
-												width={20}
-												height={20}
-												src="/images/bar-chart.png"
-												alt="bar chart icon"
-												className="mb-1"
-											></Image>
-										</ToggleGroupItem>
-									</ToggleGroup>
+								<div className="flex w-full item-between space-between gap-2 justify-between">
+									<SortTypeSwitch handleSortType={handleSortType} />
+									<GraphTypeSwitchAndDelete
+										handleDeleteTable={handleDeleteTable}
+										handleGraphType={handleGraphType}
+									/>
 								</div>
 							</div>
 							<Separator
 								orientation="horizontal"
 								className="w-full"
 							></Separator>
-							<TableInputform data={selectedTable}></TableInputform>
+							<TableInputForm
+								selectedTable={selectedTable}
+								userId={userId}
+								handleNewRow={handleNewRow}
+							></TableInputForm>
 						</div>
 					</ResizablePanel>
 					<ResizableHandle withHandle />
 					<ResizablePanel defaultSize={40}>
 						<div className="flex h-full items-center justify-center">
-							<DataTable
-								columns={columns}
-								data={selectedTable.payload}
-								tableHeaders={selectedTable}
-							></DataTable>
+							<TablePanel
+								handleEditRow={handleEditRow}
+								selectedTable={selectedTable}
+								handleDeleteRow={handleDeleteRow}
+							/>
 						</div>
 					</ResizablePanel>
 				</ResizablePanelGroup>{" "}
@@ -120,16 +107,18 @@ export default function MainPanel({
 			<div>
 				<Select
 					onValueChange={(e: any) => {
-						handleUpdateTable(e);
+						handleUpdateSelectedTable(e);
 					}}
 				>
 					<SelectTrigger className="w-[320px] border-none">
-						<SelectValue placeholder={selectedTable.tableName} />
+						<SelectValue placeholder={selectedTable.tablename} />
 					</SelectTrigger>
 					<SelectContent className="min-h-[726px] shadow-std rounded bg-black">
-						{data.map((x) => (
-							<SelectItem key={x.id} value={x.id}>
-								{x.tableName}
+						{data.map((x: { id: string; tablename: string }) => (
+							<SelectItem key={x.id} value={String(x.id)}>
+								<div className="flex w-[300px] justify-between">
+									{x.tablename}
+								</div>
 							</SelectItem>
 						))}
 					</SelectContent>

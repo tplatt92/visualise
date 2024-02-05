@@ -1,0 +1,17 @@
+{
+	"data": {
+		"data": {
+			"userId": "0",
+			"userTables": [
+				{
+					"id": "0",
+					"tableName": "Please Select or Create A Table",
+					"entryRowName": "Entry Name",
+					"xAxisName": "X Axis",
+					"yAxisName": "Y Axis",
+					"payload": [{ "entryId": "0", "entryName": "N/A", "x": 0, "y": 0 }]
+				}
+			]
+		}
+	}
+}

@@ -1,94 +1,96 @@
 [
-  {
-    "userId": "1",
-    "userTables": [
-      {
-        "id": "0",
-        "tableName": "Test Table 1",
-        "entryRowName": "Row 1",
-        "xAxisName": "Time",
-        "yAxisName": "Value",
-        "payload": [
-          { "entryId": 0, "entryName": "Entry 1", "x": 18, "y": 36 },
-          { "entryId": 1, "entryName": "Entry 2", "x": 11, "y": 2 },
-          { "entryId": 2, "entryName": "Entry 3", "x": 6, "y": 12 },
-          { "entryId": 3, "entryName": "Entry 4", "x": 2, "y": 4 },
-          { "entryId": 4, "entryName": "Entry 5", "x": 7, "y": 14 },
-          { "entryId": 5, "entryName": "Entry 6", "x": 16, "y": 2 },
-          { "entryId": 6, "entryName": "Entry 7", "x": 3, "y": 46 },
-          { "entryId": 7, "entryName": "Entry 8", "x": 13, "y": 26 },
-          { "entryId": 8, "entryName": "Entry 9", "x": 20, "y": 40 },
-          { "entryId": 9, "entryName": "Entry 10", "x": 14, "y": 8 },
-          { "entryId": 10, "entryName": "Entry 11", "x": 4, "y": 8 },
-          { "entryId": 11, "entryName": "Entry 12", "x": 9, "y": 8 },
-          { "entryId": 12, "entryName": "Entry 13", "x": 8, "y": 16 },
-          { "entryId": 13, "entryName": "Entry 14", "x": 10, "y": 20 },
-          { "entryId": 14, "entryName": "Entry 15", "x": 12, "y": 4 },
-          { "entryId": 15, "entryName": "Entry 16", "x": 19, "y": 8 },
-          { "entryId": 16, "entryName": "Entry 17", "x": 15, "y": 30 },
-          { "entryId": 17, "entryName": "Entry 18", "x": 17, "y": 44 },
-          { "entryId": 18, "entryName": "Entry 19", "x": 5, "y": 20 },
-          { "entryId": 19, "entryName": "Entry 20", "x": 1, "y": 2 }
-        ]
-      },
-      {
-        "id": "1",
-        "tableName": "Test Table 2",
-        "entryRowName": "Row 2",
-        "xAxisName": "Time",
-        "yAxisName": "Cash",
-        "payload": [
-          { "entryName": "Entry 21", "x": 25, "y": 42 },
-          { "entryName": "Entry 22", "x": 28, "y": 14 },
-          { "entryName": "Entry 23", "x": 33, "y": 36 },
-          { "entryName": "Entry 24", "x": 42, "y": 28 },
-          { "entryName": "Entry 25", "x": 37, "y": 38 },
-          { "entryName": "Entry 26", "x": 26, "y": 18 },
-          { "entryName": "Entry 27", "x": 23, "y": 6 },
-          { "entryName": "Entry 28", "x": 13, "y": 16 },
-          { "entryName": "Entry 29", "x": 10, "y": 10 },
-          { "entryName": "Entry 30", "x": 30, "y": 24 },
-          { "entryName": "Entry 31", "x": 41, "y": 32 },
-          { "entryName": "Entry 32", "x": 36, "y": 30 },
-          { "entryName": "Entry 33", "x": 35, "y": 20 },
-          { "entryName": "Entry 34", "x": 40, "y": 34 },
-          { "entryName": "Entry 35", "x": 22, "y": 26 },
-          { "entryName": "Entry 36", "x": 29, "y": 12 },
-          { "entryName": "Entry 37", "x": 16, "y": 22 },
-          { "entryName": "Entry 38", "x": 18, "y": 8 },
-          { "entryName": "Entry 39", "x": 27, "y": 40 },
-          { "entryName": "Entry 40", "x": 31, "y": 4 }
-        ]
-      },
-      {
-        "id": "2",
-        "tableName": "Test Table 3",
-        "entryRowName": "Row 3",
-        "xAxisName": "Time",
-        "yAxisName": "Money",
-        "payload": [
-          { "entryName": "Entry 41", "x": 45, "y": 18 },
-          { "entryName": "Entry 42", "x": 38, "y": 24 },
-          { "entryName": "Entry 43", "x": 43, "y": 10 },
-          { "entryName": "Entry 44", "x": 32, "y": 26 },
-          { "entryName": "Entry 45", "x": 47, "y": 16 },
-          { "entryName": "Entry 46", "x": 36, "y": 34 },
-          { "entryName": "Entry 47", "x": 39, "y": 42 },
-          { "entryName": "Entry 48", "x": 49, "y": 32 },
-          { "entryName": "Entry 49", "x": 44, "y": 28 },
-          { "entryName": "Entry 50", "x": 34, "y": 30 },
-          { "entryName": "Entry 51", "x": 23, "y": 20 },
-          { "entryName": "Entry 52", "x": 28, "y": 38 },
-          { "entryName": "Entry 53", "x": 37, "y": 12 },
-          { "entryName": "Entry 54", "x": 46, "y": 36 },
-          { "entryName": "Entry 55", "x": 25, "y": 8 },
-          { "entryName": "Entry 56", "x": 42, "y": 22 },
-          { "entryName": "Entry 57", "x": 29, "y": 40 },
-          { "entryName": "Entry 58", "x": 31, "y": 14 },
-          { "entryName": "Entry 59", "x": 40, "y": 4 },
-          { "entryName": "Entry 60", "x": 35, "y": 30 }
-        ]
-      }
-    ]
-  }
+	{
+		"userId": "1",
+		"userTables": [
+			{
+				"id": "0",
+				"tableName": "Test Table 1",
+				"entryRowName": "Row 1",
+				"xAxisName": "Time",
+				"yAxisName": "Value",
+				"payload": [
+					{ "entryId": "0", "entryName": "Entry 1", "x": 18, "y": 36 },
+					{ "entryId": "1", "entryName": "Entry 2", "x": 11, "y": 2 },
+					{ "entryId": "2", "entryName": "Entry 3", "x": 6, "y": 12 },
+					{ "entryId": "3", "entryName": "Entry 4", "x": 2, "y": 4 },
+					{ "entryId": "4", "entryName": "Entry 5", "x": 7, "y": 14 },
+					{ "entryId": "5", "entryName": "Entry 6", "x": 16, "y": 2 },
+					{ "entryId": "6", "entryName": "Entry 7", "x": 3, "y": 46 },
+					{ "entryId": "7", "entryName": "Entry 8", "x": 13, "y": 26 },
+					{ "entryId": "8", "entryName": "Entry 9", "x": 20, "y": 40 },
+					{ "entryId": "9", "entryName": "Entry 10", "x": 14, "y": 8 },
+					{ "entryId": "10", "entryName": "Entry 11", "x": 4, "y": 8 },
+					{ "entryId": "11", "entryName": "Entry 12", "x": 9, "y": 8 },
+					{ "entryId": "12", "entryName": "Entry 13", "x": 8, "y": 16 },
+					{ "entryId": "13", "entryName": "Entry 14", "x": 10, "y": 20 },
+					{ "entryId": "14", "entryName": "Entry 15", "x": 12, "y": 4 },
+					{ "entryId": "15", "entryName": "Entry 16", "x": 19, "y": 8 },
+					{ "entryId": "16", "entryName": "Entry 17", "x": 15, "y": 30 },
+					{ "entryId": "17", "entryName": "Entry 18", "x": 17, "y": 44 },
+					{ "entryId": "18", "entryName": "Entry 19", "x": 5, "y": 20 },
+					{ "entryId": "19", "entryName": "Entry 20", "x": 1, "y": 2 }
+				]
+			},
+			{
+				"id": "1",
+				"tableName": "Test Table 2",
+				"entryRowName": "Row 2",
+				"xAxisName": "Time",
+				"yAxisName": "Value",
+				"payload": [
+					{ "entryId": "0", "entryName": "Entry 1", "x": 18, "y": 36 },
+					{ "entryId": "1", "entryName": "Entry 2", "x": 11, "y": 2 },
+					{ "entryId": "2", "entryName": "Entry 3", "x": 6, "y": 12 },
+					{ "entryId": "3", "entryName": "Entry 4", "x": 2, "y": 4 },
+					{ "entryId": "4", "entryName": "Entry 5", "x": 7, "y": 14 },
+					{ "entryId": "5", "entryName": "Entry 6", "x": 16, "y": 2 },
+					{ "entryId": "6", "entryName": "Entry 7", "x": 3, "y": 46 },
+					{ "entryId": "7", "entryName": "Entry 8", "x": 13, "y": 26 },
+					{ "entryId": "8", "entryName": "Entry 9", "x": 20, "y": 40 },
+					{ "entryId": "9", "entryName": "Entry 10", "x": 14, "y": 8 },
+					{ "entryId": "10", "entryName": "Entry 11", "x": 4, "y": 8 },
+					{ "entryId": "11", "entryName": "Entry 12", "x": 9, "y": 8 },
+					{ "entryId": "12", "entryName": "Entry 13", "x": 8, "y": 16 },
+					{ "entryId": "13", "entryName": "Entry 14", "x": 10, "y": 20 },
+					{ "entryId": "14", "entryName": "Entry 15", "x": 12, "y": 4 },
+					{ "entryId": "15", "entryName": "Entry 16", "x": 19, "y": 8 },
+					{ "entryId": "16", "entryName": "Entry 17", "x": 15, "y": 30 },
+					{ "entryId": "17", "entryName": "Entry 18", "x": 17, "y": 44 },
+					{ "entryId": "18", "entryName": "Entry 19", "x": 5, "y": 20 },
+					{ "entryId": "19", "entryName": "Entry 20", "x": 1, "y": 2 }
+				]
+			},
+			{
+				"id": "2",
+				"tableName": "Test Table 2",
+				"entryRowName": "Row 3",
+				"xAxisName": "Time",
+				"yAxisName": "Value",
+				"payload": [
+					{ "entryId": "0", "entryName": "Entry 1", "x": 18, "y": 36 },
+					{ "entryId": "1", "entryName": "Entry 2", "x": 11, "y": 2 },
+					{ "entryId": "2", "entryName": "Entry 3", "x": 6, "y": 12 },
+					{ "entryId": "3", "entryName": "Entry 4", "x": 2, "y": 4 },
+					{ "entryId": "4", "entryName": "Entry 5", "x": 7, "y": 14 },
+					{ "entryId": "5", "entryName": "Entry 6", "x": 16, "y": 2 },
+					{ "entryId": "6", "entryName": "Entry 7", "x": 3, "y": 46 },
+					{ "entryId": "7", "entryName": "Entry 8", "x": 13, "y": 26 },
+					{ "entryId": "8", "entryName": "Entry 9", "x": 20, "y": 40 },
+					{ "entryId": "9", "entryName": "Entry 10", "x": 14, "y": 8 },
+					{ "entryId": "10", "entryName": "Entry 11", "x": 4, "y": 8 },
+					{ "entryId": "11", "entryName": "Entry 12", "x": 9, "y": 8 },
+					{ "entryId": "12", "entryName": "Entry 13", "x": 8, "y": 16 },
+					{ "entryId": "13", "entryName": "Entry 14", "x": 10, "y": 20 },
+					{ "entryId": "14", "entryName": "Entry 15", "x": 12, "y": 4 },
+					{ "entryId": "15", "entryName": "Entry 16", "x": 19, "y": 8 },
+					{ "entryId": "16", "entryName": "Entry 17", "x": 15, "y": 30 },
+					{ "entryId": "17", "entryName": "Entry 18", "x": 17, "y": 44 },
+					{ "entryId": "18", "entryName": "Entry 19", "x": 5, "y": 20 },
+					{ "entryId": "19", "entryName": "Entry 20", "x": 1, "y": 2 }
+				]
+			},
+		]
+	}
 ]
+
+

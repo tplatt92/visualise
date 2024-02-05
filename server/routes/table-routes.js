@@ -1,11 +1,11 @@
 import express from "express";
 import {
-  getUserObject,
-  postRow,
-  postTable,
-  updateRow,
-  deleteTable,
-  deleteRow,
+	getUserObject,
+	postRow,
+	postTable,
+	updateRow,
+	deleteTable,
+	deleteRow,
 } from "../controllers/tables-controllers.js";
 
 const tableRouter = express.Router();
