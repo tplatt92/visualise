@@ -69,21 +69,84 @@ export const postRow = async (req, res) => {
 };
 
 // Edit existing row -> user id + table id + row id
-export const updateRow = (req, res) => {
+// export const updateRow = async (req, res) => {
+//   try {
+//     const { userId, tableId, rowId } = req.params;
+//     const { entryid, entryname, x, y } = await req.body;
+//     const response = await tableObject.findOneAndUpdate(
+//       {
+//         userId: userId,
+//         "userTables.id": tableId,
+//         "payload.entryid": rowId,
+//       },
+//       {
+//         $set: {
+//           "payload.$": {
+//             entryid,
+//             entryname,
+//             x,
+//             y,
+//           },
+//         },
+//       }
+//     );
+//     const updatedResponse = await tableObject.find({ userId: String(userId) });
+//     res.status(201).json(response);
+//   } catch (error) {
+//     console.log(error.message);
+//     res.status(500).json({ message: error.message });
+//   }
+// };
+
+export const updateRow = async (req, res) => {
   try {
     const { userId, tableId, rowId } = req.params;
-    res.send(`Id = ${userId}, TableId = ${tableId} and RowId = ${rowId}`);
+    const { entryid, entryname, x, y } = req.body;
+
+    const response = await tableObject.updateOne(
+      {
+        userId: userId,
+        "userTables.id": tableId,
+        "userTables.payload.entryId": rowId,
+      },
+      {
+        $set: {
+          "userTables.$[outer].payload.$[inner].entryName": entryname,
+          "userTables.$[outer].payload.$[inner].x": x,
+          "userTables.$[outer].payload.$[inner].y": y,
+        },
+      },
+      {
+        arrayFilters: [{ "outer.id": tableId }, { "inner.entryId": rowId }],
+      }
+    );
+
+    const updatedResponse = await tableObject.find({ userId: String(userId) });
+    res.status(200).json(updatedResponse);
   } catch (error) {
-    console.log(error.message);
+    console.error("Error:", error);
     res.status(500).json({ message: error.message });
   }
 };
 
 // Delete whole table -> user id + table id
-export const deleteTable = (req, res) => {
+export const deleteTable = async (req, res) => {
   try {
     const { userId, tableId } = req.params;
-    res.send(`Id = ${userId}, TableId = ${tableId}.`);
+    const response = await tableObject.updateOne(
+      {
+        userId: userId,
+      },
+      {
+        $pull: {
+          userTables: {
+            id: tableId,
+          },
+        },
+      }
+    );
+    const updatedResponse = await tableObject.find({ userId: String(userId) });
+    res.status(200).json(updatedResponse);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });
@@ -91,10 +154,24 @@ export const deleteTable = (req, res) => {
 };
 
 // Delete row in existing table -> user id + table id + row id
-export const deleteRow = (req, res) => {
+export const deleteRow = async (req, res) => {
   try {
     const { userId, tableId, rowId } = req.params;
-    res.send(`Id = ${userId}, TableId = ${tableId} and RowId = ${rowId}`);
+    const response = await tableObject.updateOne(
+      {
+        userId: userId,
+        "userTables.id": tableId,
+      },
+      {
+        $pull: {
+          "userTables.$.payload": {
+            entryid: rowId,
+          },
+        },
+      }
+    );
+    const updatedResponse = await tableObject.find({ userId: String(userId) });
+    res.status(200).json(updatedResponse);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });
