@@ -108,7 +108,13 @@ export const updatePassword = async (req, res) => {
 export const deleteAccount = async (req, res) => {
 	const { username } = req.body;
 
-	const response = await tableObject.deleteOne({ username: username });
-
-	res.send(200).json(response);
+	try {
+		await tableObject.deleteOne({ username: username });
+		res.sendStatus(200);
+	} catch (error) {
+		console.error("Error deleting account:", error);
+		res
+			.status(500)
+			.json({ error: "An error occurred while deleting the account" });
+	}
 };

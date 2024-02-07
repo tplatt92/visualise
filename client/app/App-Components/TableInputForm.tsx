@@ -100,7 +100,7 @@ export default function TableInputForm({
 				</div>
 			</div>
 			<Button
-				className="flex self-center gap-4 rounded w-1/2"
+				className="flex self-center gap-4 rounded w-1/2 min-w-[160px]"
 				onClick={() => createRow()}
 			>
 				Create New Item

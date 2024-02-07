@@ -182,6 +182,7 @@ export const deleteTable = async (req, res) => {
 export const deleteRow = async (req, res) => {
 	try {
 		const { userId, tableId, rowId } = req.params;
+
 		const response = await tableObject.updateOne(
 			{
 				userId: userId,
@@ -190,11 +191,12 @@ export const deleteRow = async (req, res) => {
 			{
 				$pull: {
 					"userTables.$.payload": {
-						entryid: rowId,
+						entryid: parseInt(rowId),
 					},
 				},
 			}
 		);
+
 		const updatedResponse = await tableObject.find({ userId: String(userId) });
 		res.status(200).json(updatedResponse);
 	} catch (error) {

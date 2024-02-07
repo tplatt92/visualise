@@ -70,11 +70,6 @@ export default function Home() {
 			await fetch("http://localhost:8080/users/deleteAccount", {
 				method: "POST",
 				mode: "cors",
-				credentials: "include",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json;charset=UTF-8",
-				},
 				body: JSON.stringify({
 					username: username,
 				}),

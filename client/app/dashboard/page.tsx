@@ -9,6 +9,7 @@ import defaultData from "../../defaultData.json";
 import { Payload, UserTables } from "@/types/types";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import MainPanelMob from "../App-Components/MainPanelMob";
 
 const ovo = Ovo({ subsets: ["latin"], weight: "400" });
 
@@ -160,20 +161,44 @@ export default function Dashboard() {
 	}
 
 	return (
-		<>
+		<div className="flex flex-col">
 			<Nav></Nav>
-			<main className="px-16 pt-16 w-full lg:block md:flex md: flex-col">
-				<div className="flex items-center justify-between">
-					<h1 className={`text-[#FFF5EE] text-6xl ${ovo.className}`}>
-						{selectedTable?.tablename}
-					</h1>
-					<CreateNewTable
-						userId={userId}
+			<main className="px-4 pt-4 md:px-16 md:pt-16 w-full lg:block flex-col">
+				<div className="pt-4 block lg:hidden flex-col">
+					<div className="flex flex-col items-center justify-between gap-16">
+						<CreateNewTable
+							userId={userId}
+							data={data}
+							handleNewTable={handleNewTable}
+						/>
+						<h1 className={`text-[#FFF5EE] text-4xl ${ovo.className}`}>
+							{selectedTable?.tablename}
+						</h1>
+					</div>
+
+					<MainPanelMob
 						data={data}
-						handleNewTable={handleNewTable}
-					/>
+						handleUpdateSelectedTable={handleUpdateSelectedTable}
+						selectedTable={selectedTable}
+						userId={userId}
+						handleNewRow={handleNewRow}
+						handleDeleteTable={handleDeleteTable}
+						handleDeleteRow={handleDeleteRow}
+						handleEditRow={handleEditRow}
+					></MainPanelMob>
 				</div>
-				<div className="pt-4">
+				<div className="pt-4 hidden lg:block">
+					<div className="flex items-center justify-between">
+						<h1 className={`text-[#FFF5EE] text-6xl ${ovo.className}`}>
+							{selectedTable?.tablename}
+						</h1>
+						<CreateNewTable
+							userId={userId}
+							data={data}
+							handleNewTable={handleNewTable}
+						/>
+					</div>
+
 					<MainPanel
 						data={data}
 						handleUpdateSelectedTable={handleUpdateSelectedTable}
@@ -187,6 +212,6 @@ export default function Dashboard() {
 				</div>
 			</main>
 			<footer className="h-8" />
-		</>
+		</div>
 	);
 }

@@ -34,8 +34,8 @@ export default function Nav() {
 	};
 
 	return (
-		<div>
-			<nav className="w-full flex h-[95px] bg-black px-[64px] p-[32px] items-center justify-between z-50 shadow-std">
+		<div className="w-screen">
+			<nav className="w-screen flex h-[95px] bg-black px-[16px] p-[16px] md:px-[64px] md:p-[32px] items-center justify-between z-50 shadow-std">
 				<div className="flex items-center justify-center gap-[10px]">
 					<Image
 						alt="visualise logo"
@@ -50,7 +50,7 @@ export default function Nav() {
 				</div>
 				<div className="flex gap-4 justify-between items-center">
 					<p
-						className={`text-[#FFF5EE] text-[32px] max-w-[400px] truncate ${ovo.className}`}
+						className={`text-[#FFF5EE] text-[32px] max-w-[400px] truncate hidden lg:block ${ovo.className}`}
 					>
 						{username}
 					</p>
