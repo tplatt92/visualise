@@ -29,7 +29,7 @@ export default function TableInputForm({
 
 	async function createRow() {
 		let rowData = {
-			entryid: String(selectedTable.payload.length),
+			entryid: Number(selectedTable.payload.length),
 			entryname: entryInput,
 			x: Number(xInput),
 			y: Number(yInput),

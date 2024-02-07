@@ -20,7 +20,7 @@ export default function Graph({
 }: GraphProps) {
 	if (sortType === SortType.Date) {
 		selectedTable.payload = [
-			...selectedTable.payload.sort((a: any, b: any) => a.entryid - b.entryid),
+			...selectedTable.payload.sort((a: any, b: any) => a.entrid - b.entryid),
 		];
 	} else if (sortType === SortType.Asc) {
 		selectedTable.payload = [

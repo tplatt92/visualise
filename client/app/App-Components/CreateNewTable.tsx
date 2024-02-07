@@ -100,7 +100,6 @@ export default function CreateNewTable({
 						entryname: "",
 						x: 0,
 						y: 0,
-						
 					},
 				},
 				tableData,

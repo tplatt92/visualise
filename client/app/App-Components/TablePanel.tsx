@@ -78,24 +78,26 @@ function Row({
 }: RowProps) {
 	const [triggerEditDeleteInfo, setTriggerEditDeleteInfo] = useState<string>();
 	const [menuOpen, setMenuOpen] = useState<boolean>(false);
+	const [editEntryId, setEditEntryId] = useState(entryId);
 	const [editEntryNameValue, setEditEntryNameValue] =
 		useState<string>(entryName);
 	const [editXAxisValue, setEditXAxisValue] = useState<string>(xAxisRow);
 	const [editYAxisValue, setEditYAxisValue] = useState<string>(yAxisRow);
 
 	const [updateObject, setUpdateObject] = useState({
-		entryid: entryId,
+		entryid: Number(editEntryId),
 		entryname: editEntryNameValue,
 		x: Number(editXAxisValue),
 		y: Number(editYAxisValue),
 	});
 
 	useEffect(() => {
+		setEditEntryId(entryId);
 		setEditEntryNameValue(entryName);
 		setEditXAxisValue(xAxisRow);
 		setEditYAxisValue(yAxisRow);
 		setUpdateObject({
-			entryid: entryId,
+			entryid: Number(editEntryId),
 			entryname: editEntryNameValue,
 			x: Number(editXAxisValue),
 			y: Number(editYAxisValue),
@@ -104,15 +106,15 @@ function Row({
 
 	useEffect(() => {
 		setUpdateObject({
-			entryid: entryId,
+			entryid: Number(editEntryId),
 			entryname: editEntryNameValue,
 			x: Number(editXAxisValue),
 			y: Number(editYAxisValue),
 		});
-	}, [editEntryNameValue, editXAxisValue, editYAxisValue]);
+	}, [editEntryId, editEntryNameValue, editXAxisValue, editYAxisValue]);
 
 	return (
-		<div key={entryId} className="hover:bg-neutral-900 h-full">
+		<div key={Number(entryId)} className="hover:bg-neutral-900 h-full">
 			<div className="flex flex-row w-full h-8 font-[200] justify-center items-center m-4">
 				<p className="w-[40%]">{entryName}</p>
 				<p className="w-[25%]">{xAxisRow}</p>
@@ -220,8 +222,7 @@ function Row({
 											type="submit"
 											className="rounded"
 											onClick={() => {
-												handleEditRow(entryId, updateObject),
-													setMenuOpen(false);
+												handleEditRow(updateObject), setMenuOpen(false);
 											}}
 										>
 											Confirm

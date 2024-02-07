@@ -7,11 +7,57 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
+import { useContext } from "react";
+import { useRouter } from "next/navigation";
+import { setCookie } from "cookies-next";
+import { toast } from "sonner";
+
 const ovo = Ovo({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
+	const router = useRouter();
 	const [usernameInput, setUsernameInput] = useState("");
 	const [passwordInput, setPasswordInput] = useState("");
+
+	const login = async () => {
+		try {
+			const response = await fetch("http://localhost:8080/users/login", {
+				method: "POST",
+				credentials: "include",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username: usernameInput,
+					password: passwordInput,
+				}),
+			});
+
+			const userData = await response.json();
+
+			if (userData) {
+				setCookie("userId", userData.userId, {
+					expires: new Date(
+						new Date().setFullYear(new Date().getFullYear() + 1)
+					),
+				});
+
+				setCookie("username", userData.username, {
+					expires: new Date(
+						new Date().setFullYear(new Date().getFullYear() + 1)
+					),
+				});
+
+				router.replace("/dashboard");
+			} else {
+				toast("Error logging in");
+			}
+		} catch (error) {
+			toast("Error logging in", {
+				description: `${error}`,
+			});
+		}
+	};
 
 	return (
 		<main className="bg-[#090909] h-screen w-full flex">
@@ -87,9 +133,11 @@ export default function Home() {
 							value={passwordInput}
 							onChange={(e) => setPasswordInput(e.target.value)}
 						></Input>
-						<Link href="/dashboard">
-							<Button className="rounded w-[400px]">Log In</Button>
-						</Link>
+						{/* <Link href="/dashboard"> */}
+						<Button className="rounded w-[400px]" onClick={login}>
+							Log In
+						</Button>
+						{/* </Link> */}
 					</div>
 				</div>
 			</div>

@@ -18,7 +18,7 @@ export type UserTables = {
 };
 
 export type Payload = {
-	entryid?: string;
+	entryid?: number;
 	entryname?: string;
 	x?: number;
 	y?: number;
@@ -36,9 +36,9 @@ export type MainPanelProps = {
 	handleDeleteTable: () => void;
 	handleDeleteRow: (rowId: string) => void;
 	handleEditRow: (
-		entryId: string,
+		entryId: number,
 		updateObject: {
-			entryid: string;
+			entryid: number;
 			entryname: string;
 			x: number;
 			y: number;
@@ -94,11 +94,11 @@ export type HeaderProps = {
 };
 
 export type RowProps = {
-	entryId: string | (() => string)
-	entryName: string | (() => string)
-	xAxisRow: string | (() => string)
-	yAxisRow: string | (() => string)
-	handleDeleteRow: (rowId: string) => void;
+	entryId: number | (() => number);
+	entryName: string | (() => string);
+	xAxisRow: string | (() => string);
+	yAxisRow: string | (() => string);
+	handleDeleteRow: (rowId: number) => void;
 	selectedTable: UserTables;
 	handleEditRow: any;
 };

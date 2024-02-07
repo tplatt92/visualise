@@ -13,7 +13,7 @@ const tableRouter = express.Router();
 tableRouter.get("/:userId", getUserObject);
 tableRouter.post("/:userId", postTable);
 tableRouter.post("/:userId/:tableId", postRow);
-tableRouter.put("/:userId/:tableId/:rowId", updateRow);
+tableRouter.put("/:userId/:userTables/:entryid", updateRow);
 tableRouter.delete("/:userId/:tableId", deleteTable);
 tableRouter.delete("/:userId/:tableId/:rowId", deleteRow);
 

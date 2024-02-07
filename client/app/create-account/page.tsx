@@ -7,13 +7,80 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
+import { useRouter } from "next/navigation";
+import { setCookie } from "cookies-next";
+import { toast } from "sonner";
 const ovo = Ovo({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
+	const router = useRouter();
 	const [usernameInput, setUsernameInput] = useState("");
 	const [passwordInput, setPasswordInput] = useState("");
 	const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
 
+	const createAccount = async () => {
+		if (passwordInput === confirmPasswordInput) {
+			try {
+				const userData = await fetch("http://localhost:8080/users/register", {
+					method: "POST",
+					credentials: "include",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						username: usernameInput,
+						password: passwordInput,
+					}),
+				});
+
+				if (userData) {
+					toast("Account created successfully");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		} else {
+			alert("xxx");
+		}
+
+		try {
+			const response = await fetch("http://localhost:8080/users/login", {
+				method: "POST",
+				credentials: "include",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					username: usernameInput,
+					password: passwordInput,
+				}),
+			});
+
+			const userData = await response.json();
+
+			if (userData) {
+				setCookie("userId", userData.userId, {
+					expires: new Date(
+						new Date().setFullYear(new Date().getFullYear() + 1)
+					),
+				});
+
+				setCookie("username", userData.username, {
+					expires: new Date(
+						new Date().setFullYear(new Date().getFullYear() + 1)
+					),
+				});
+
+				router.replace("/dashboard");
+			} else {
+				toast("Error logging in");
+			}
+		} catch (error) {
+			toast("Error logging in", {
+				description: `${error}`,
+			});
+		}
+	};
 	return (
 		<main className="bg-[#090909] h-screen w-full flex">
 			<div className="h-full w-1/2 bg-black">
@@ -95,9 +162,10 @@ export default function Home() {
 							value={confirmPasswordInput}
 							onChange={(e) => setConfirmPasswordInput(e.target.value)}
 						></Input>
-						<Link href="/dashboard">
-							<Button className="rounded w-[400px] ">Create Account</Button>
-						</Link>
+
+						<Button className="rounded w-[400px] " onClick={createAccount}>
+							Create Account
+						</Button>
 					</div>
 				</div>
 			</div>

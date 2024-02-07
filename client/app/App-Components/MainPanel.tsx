@@ -40,7 +40,7 @@ export default function MainPanel({
 	handleDeleteRow,
 	handleEditRow,
 }: MainPanelProps) {
-	const [graphType, setGraphType] = useState("line")
+	const [graphType, setGraphType] = useState("line");
 	const [sortType, setSortType] = useState("date");
 
 	function handleSortType(sortType: SortType | string) {
@@ -52,7 +52,7 @@ export default function MainPanel({
 	}
 
 	return (
-		<div className="flex gap-12">
+		<div className="flex lg:flex-row md:flex-col gap-12">
 			<div className="flex-1">
 				<ResizablePanelGroup
 					direction="horizontal"
@@ -110,13 +110,13 @@ export default function MainPanel({
 						handleUpdateSelectedTable(e);
 					}}
 				>
-					<SelectTrigger className="w-[320px] border-none">
+					<SelectTrigger className="w-[320px] max-w-[320px] border-none">
 						<SelectValue placeholder={selectedTable.tablename} />
 					</SelectTrigger>
-					<SelectContent className="min-h-[726px] shadow-std rounded bg-black">
+					<SelectContent className="min-h-[726px] max-w-[320px] w-[320px] shadow-std rounded bg-black">
 						{data.map((x: { id: string; tablename: string }) => (
 							<SelectItem key={x.id} value={String(x.id)}>
-								<div className="flex w-[300px] justify-between">
+								<div className="flex max-w-[300px] w-[300px] justify-between">
 									{x.tablename}
 								</div>
 							</SelectItem>

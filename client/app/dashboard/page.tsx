@@ -7,25 +7,31 @@ import CreateNewTable from "../App-Components/CreateNewTable";
 import { useEffect, useState } from "react";
 import defaultData from "../../defaultData.json";
 import { Payload, UserTables } from "@/types/types";
+import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 const ovo = Ovo({ subsets: ["latin"], weight: "400" });
 
-
-export const userIdJWT = "1";
+export const userIdJWT: string | (() => string) = getCookie("userId") || "";
 
 export default function Dashboard() {
+	const router = useRouter();
 	const [data, setData] = useState<any>(defaultData.data.data.userTables);
 	const [selectedTable, setSelectedTable] = useState<UserTables>(data[0]);
-	const [userId, setUserId] = useState<string>(userIdJWT);
+	const [userId, setUserId] = useState<string | undefined>(userIdJWT || "1");
 
 	async function fetchUserObject() {
+		setUserId(getCookie("userId"));
 		try {
 			let fetchUserObject = await fetch(
-				`http://localhost:8080/tables/${userId}`
+				`http://localhost:8080/tables/${userId}`,
+				{
+					credentials: "include",
+				}
 			);
 
 			let userObject = await fetchUserObject.json();
-			console.log(userObject);
+
 			if (userObject) {
 				setData(await userObject[0].userTables);
 				setSelectedTable(await data[0]);
@@ -34,7 +40,6 @@ export default function Dashboard() {
 			console.log(error);
 		}
 	}
-	console.log(selectedTable);
 
 	useEffect(() => {
 		fetchUserObject();
@@ -49,10 +54,12 @@ export default function Dashboard() {
 		tableObject: any,
 		userId: string
 	) {
+		console.log(userId);
 		setData([...data, tableData.tableData]);
 		await fetch(`http://localhost:8080/tables/${userId}`, {
 			method: "POST",
 			mode: "cors",
+			credentials: "include",
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json;charset=UTF-8",
@@ -65,6 +72,7 @@ export default function Dashboard() {
 		await fetch(`http://localhost:8080/tables/${userId}/${tableId}`, {
 			method: "POST",
 			mode: "cors",
+			credentials: "include",
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json;charset=UTF-8",
@@ -83,31 +91,33 @@ export default function Dashboard() {
 		setSelectedTable(foundTable || data[data.length - 1]);
 	}
 
-	async function handleEditRow(
-		entryId: string,
-		updateObject: {
-			entryid: string;
-			entryname: string;
-			x: number;
-			y: number;
-		}
-	) {
-		console.log(updateObject);
+	async function handleEditRow(updateObject: {
+		entryid: number;
+		entryname: string;
+		x: number;
+		y: number;
+	}) {
 		try {
+			console.log(JSON.stringify(updateObject));
+			console.log(userId + " " + selectedTable.id + " " + updateObject.entryid);
 			await fetch(
-				`http://localhost:8080/tables/${userId}/${selectedTable.id}/${entryId}`,
+				`http://localhost:8080/tables/${userId}/${selectedTable.id}/${updateObject.entryid}`,
 				{
 					method: "PUT",
+					mode: "cors",
+					credentials: "include",
 					headers: {
-						"Content-Type": "application/json",
+						Accept: "application/json",
+						"Content-Type": "application/json;charset=UTF-8",
 					},
 					body: JSON.stringify(updateObject),
 				}
 			);
+
 			let updatedPayload: any = selectedTable.payload;
 
 			for (let i = 0; i < updatedPayload.length; i++) {
-				if (updatedPayload[i].entryid === entryId) {
+				if (updatedPayload[i].entryid === updateObject.entryid) {
 					updatedPayload[i] = updateObject;
 				}
 			}
@@ -124,6 +134,7 @@ export default function Dashboard() {
 	async function handleDeleteTable() {
 		await fetch(`http://localhost:8080/tables/${userId}/${selectedTable.id}`, {
 			method: "DELETE",
+			credentials: "include",
 		});
 		setData(data.filter((x: any) => x.id !== selectedTable.id));
 		setSelectedTable(data[0]);
@@ -143,6 +154,7 @@ export default function Dashboard() {
 			`http://localhost:8080/tables/${userId}/${selectedTable.id}/${rowId}`,
 			{
 				method: "DELETE",
+				credentials: "include",
 			}
 		);
 	}
@@ -150,7 +162,7 @@ export default function Dashboard() {
 	return (
 		<>
 			<Nav></Nav>
-			<main className="px-16 pt-16 w-full">
+			<main className="px-16 pt-16 w-full lg:block md:flex md: flex-col">
 				<div className="flex items-center justify-between">
 					<h1 className={`text-[#FFF5EE] text-6xl ${ovo.className}`}>
 						{selectedTable?.tablename}
