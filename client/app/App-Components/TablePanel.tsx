@@ -39,9 +39,8 @@ export default function TablePanel({
 			/>
 			<Separator />
 			<ScrollArea className=" h-[732px]  rounded-md border">
-				{selectedTable.payload.map(({ entryid, entryname, x, y }) => (
+				{selectedTable?.payload?.map(({ entryid, entryname, x, y }) => (
 					<Row
-						key={entryid}
 						entryId={entryid}
 						entryName={entryname}
 						xAxisRow={x}

@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
-import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { toast } from "sonner";
@@ -34,6 +33,8 @@ export default function Home() {
 			});
 
 			const userData = await response.json();
+
+			console.log(userData);
 
 			if (userData) {
 				setCookie("userId", userData.userId, {
@@ -106,7 +107,7 @@ export default function Home() {
 			<div className="w-1/2 h-screen">
 				<div className="absolute right-[64px] top-[36px]">
 					<Link href="/create-account">
-						<Button variant="outline" className="flex-end">
+						<Button variant="outline" className="flex-end rounded">
 							Create Account
 						</Button>
 					</Link>

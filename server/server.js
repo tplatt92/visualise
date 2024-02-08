@@ -22,8 +22,7 @@ app.use(
 );
 app.use(express.json());
 
-app.use("/tables", tableRouter);
-// app.use("/tables", validateToken, tableRouter);
+app.use("/tables", validateToken, tableRouter);
 app.use("/users", userRouter);
 
 mongoose.set("strictQuery", false);

@@ -53,6 +53,7 @@ export const loginUser = async (req, res) => {
 			maxAge: 60 * 60 * 24 * 30 * 1000,
 			httpOnly: true,
 		});
+
 		res.status(200).json(user);
 	}
 };
@@ -77,7 +78,9 @@ export const registerUser = async (req, res) => {
 
 export const logoutUser = async (req, res) => {
 	res.clearCookie("access-token");
-	res.send("Cookie deleted successfully.");
+	res.clearCookie("userId");
+	res.clearCookie("username");
+	res.send("Logged out successfully.");
 };
 
 export const updatePassword = async (req, res) => {

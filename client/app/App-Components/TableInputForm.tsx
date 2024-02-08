@@ -63,7 +63,9 @@ export default function TableInputForm({
 	return (
 		<div className="flex flex-col w-full place-self-end p-8">
 			<div className="grid w-full items-center gap-1.5">
-				<Label htmlFor="entryname">{selectedTable.entryrowname}</Label>
+				<Label className="ml-3" htmlFor="entryname">
+					{selectedTable.entryrowname}
+				</Label>
 				<Input
 					type="text"
 					id="entryname"
@@ -76,7 +78,9 @@ export default function TableInputForm({
 
 			<div className="flex gap-4 py-4 w-full">
 				<div className="w-full">
-					<Label htmlFor="xaxis">{selectedTable?.xaxisname}</Label>
+					<Label className="ml-3" htmlFor="xaxis">
+						{selectedTable?.xaxisname}
+					</Label>
 					<Input
 						type="number"
 						id="xaxis"
@@ -88,7 +92,9 @@ export default function TableInputForm({
 				</div>
 
 				<div className="w-full">
-					<Label htmlFor="yaxis">{selectedTable?.yaxisname}</Label>
+					<Label className="ml-3" htmlFor="yaxis">
+						{selectedTable?.yaxisname}
+					</Label>
 					<Input
 						type="number"
 						id="yaxis"
@@ -100,7 +106,7 @@ export default function TableInputForm({
 				</div>
 			</div>
 			<Button
-				className="flex self-center gap-4 rounded w-1/2 min-w-[160px]"
+				className="flex self-center gap-4 rounded w-1/2 min-w-[160px] mb-4"
 				onClick={() => createRow()}
 			>
 				Create New Item

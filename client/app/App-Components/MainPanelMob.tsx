@@ -62,7 +62,7 @@ export default function MainPanelMob({
 					<SelectTrigger className="w-full min-w-full border-none">
 						<SelectValue placeholder={selectedTable.tablename} />
 					</SelectTrigger>
-					<SelectContent className="min-h-[726px] max-w-[320px] w-[320px] shadow-std rounded bg-black">
+					<SelectContent className="min-h-[726px]  w-full shadow-std rounded bg-black">
 						{data.map((x: { id: string; tablename: string }) => (
 							<SelectItem key={x.id} value={String(x.id)}>
 								<div className="flex max-w-[300px] w-[300px] justify-between">

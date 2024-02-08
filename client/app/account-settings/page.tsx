@@ -25,9 +25,9 @@ const ovo = Ovo({ subsets: ["latin"], weight: "400" });
 export default function Home() {
 	const router = useRouter();
 	const [username, setUserName] = useState("");
-	const [passwordInput, setPasswordInput] = useState();
-	const [newPasswordInput, setNewPasswordInput] = useState();
-	const [confirmNewPasswordInput, setConfirmNewPasswordInput] = useState();
+	const [passwordInput, setPasswordInput] = useState("");
+	const [newPasswordInput, setNewPasswordInput] = useState("");
+	const [confirmNewPasswordInput, setConfirmNewPasswordInput] = useState("");
 	const [deleteDialog, setDeleteDialog] = useState(false);
 
 	useEffect(() => {
@@ -57,9 +57,9 @@ export default function Home() {
 			});
 
 			toast("Password updated successfully");
-			setPasswordInput(undefined);
-			setNewPasswordInput(undefined);
-			setConfirmNewPasswordInput(undefined);
+			setPasswordInput("");
+			setNewPasswordInput("");
+			setConfirmNewPasswordInput("");
 		} catch (error) {
 			console.log(error);
 		}
@@ -129,7 +129,7 @@ export default function Home() {
 			<div className="w-1/2 h-screen">
 				<div className="absolute right-[64px] top-[36px]">
 					<Link href="/dashboard">
-						<Button variant="outline" className="flex-end" className="rounded">
+						<Button variant="outline" className="flex-end rounded">
 							Back to Dashboard
 						</Button>
 					</Link>

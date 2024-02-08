@@ -18,7 +18,7 @@ export const userIdJWT: string | (() => string) = getCookie("userId") || "";
 export default function Dashboard() {
 	const router = useRouter();
 	const [data, setData] = useState<any>(defaultData.data.data.userTables);
-	const [selectedTable, setSelectedTable] = useState<UserTables>(data[0]);
+	const [selectedTable, setSelectedTable] = useState<any>(data[0]);
 	const [userId, setUserId] = useState<string | undefined>(userIdJWT || "1");
 
 	async function fetchUserObject() {
@@ -167,7 +167,7 @@ export default function Dashboard() {
 				<div className="pt-4 block lg:hidden flex-col">
 					<div className="flex flex-col items-center justify-between gap-16">
 						<CreateNewTable
-							userId={userId}
+							userId={userId || ""}
 							data={data}
 							handleNewTable={handleNewTable}
 						/>
@@ -180,7 +180,7 @@ export default function Dashboard() {
 						data={data}
 						handleUpdateSelectedTable={handleUpdateSelectedTable}
 						selectedTable={selectedTable}
-						userId={userId}
+						userId={userId || ""}
 						handleNewRow={handleNewRow}
 						handleDeleteTable={handleDeleteTable}
 						handleDeleteRow={handleDeleteRow}
@@ -193,7 +193,7 @@ export default function Dashboard() {
 							{selectedTable?.tablename}
 						</h1>
 						<CreateNewTable
-							userId={userId}
+							userId={userId || ""}
 							data={data}
 							handleNewTable={handleNewTable}
 						/>
@@ -203,7 +203,7 @@ export default function Dashboard() {
 						data={data}
 						handleUpdateSelectedTable={handleUpdateSelectedTable}
 						selectedTable={selectedTable}
-						userId={userId}
+						userId={userId || ""}
 						handleNewRow={handleNewRow}
 						handleDeleteTable={handleDeleteTable}
 						handleDeleteRow={handleDeleteRow}

@@ -1,8 +1,8 @@
 import { GraphType, SortType } from "./enums";
 
 export type UserObject = {
-	userid: string;
-	usertables: UserTables;
+	userId: string;
+	userTables: UserTables;
 	map: (arg1: any) => any;
 };
 
@@ -23,27 +23,25 @@ export type Payload = {
 	x?: number;
 	y?: number;
 	length?: () => number;
-	map?: () => any;
+	map: () => any;
 	sort?: () => any;
+	filter: () => any;
 };
 
 export type MainPanelProps = {
 	data: UserObject;
 	handleUpdateSelectedTable: any;
-	selectedTable: any;
+	selectedTable: UserTables;
 	userId: string;
 	handleNewRow: (rowData: any, userId: string, tableId: string) => void;
 	handleDeleteTable: () => void;
 	handleDeleteRow: (rowId: string) => void;
-	handleEditRow: (
-		entryId: number,
-		updateObject: {
-			entryid: number;
-			entryname: string;
-			x: number;
-			y: number;
-		}
-	) => void;
+	handleEditRow: (updateObject: {
+		entryid: number;
+		entryname: string;
+		x: number;
+		y: number;
+	}) => Promise<void>;
 };
 
 export type CreateNewTableProps = {
@@ -94,11 +92,11 @@ export type HeaderProps = {
 };
 
 export type RowProps = {
-	entryId: number | (() => number);
-	entryName: string | (() => string);
-	xAxisRow: string | (() => string);
-	yAxisRow: string | (() => string);
-	handleDeleteRow: (rowId: number) => void;
+	entryId: any;
+	entryName: any;
+	xAxisRow: any;
+	yAxisRow: any;
+	handleDeleteRow: (rowId: string) => void;
 	selectedTable: UserTables;
 	handleEditRow: any;
 };

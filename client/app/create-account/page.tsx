@@ -128,7 +128,7 @@ export default function Home() {
 			<div className="w-1/2 h-screen">
 				<div className="absolute right-[64px] top-[36px]">
 					<Link href="/">
-						<Button variant="outline" className="flex-end">
+						<Button variant="outline" className="flex-end rounded">
 							Log In
 						</Button>
 					</Link>
